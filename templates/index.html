@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climbing Wall Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Climbing Wall Routes</h1>
+    <a href="{{ url_for('add_route') }}">Add New Route</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Route Name</th>
+                <th>Difficulty</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for route in routes %}
+            <tr>
+                <td>{{ route.name }}</td>
+                <td>{{ route.difficulty }}</td>
+                <td>{{ route.status }}</td>
+                <td>
+                    {% if route.status == 'active' %}
+                    <a href="{{ url_for('remove_route', id=route.id) }}">Mark as Removed</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
